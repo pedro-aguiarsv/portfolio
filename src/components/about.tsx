@@ -5,7 +5,7 @@ export function About({ locale }: { locale: Locale }) {
   const copy = getCopy(locale).about
 
   return (
-    <section id="qualificacao" className="scroll-mt-24 px-5 py-24 md:py-32 md:pr-14 md:pl-28">
+    <section id="qualificacao" className="scroll-mt-24 px-5 py-24 md:py-32 md:pr-14 md:pl-64">
       <Reveal>
         <p className="font-mono text-[11px] tracking-[0.2em] text-highlighter uppercase">
           {copy.kicker}

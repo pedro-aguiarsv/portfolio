@@ -1,13 +1,12 @@
 import type { Metadata, Viewport } from "next"
 import { notFound } from "next/navigation"
-import { FunnelRail } from "@/components/funnel-rail"
-import { SiteHeader } from "@/components/site-header"
+import { HudNav } from "@/components/hud-nav"
 import { DeferredToaster } from "@/components/deferred-toaster"
 import { getCopy, isLocale, siteUrl, type Locale } from "@/data/site"
 import "../globals.css"
 
 export const viewport: Viewport = {
-  themeColor: "#12110e",
+  themeColor: "#070b12",
 }
 
 export function generateStaticParams() {
@@ -91,8 +90,7 @@ export default async function RootLayout({
         <a href="#conteudo" className="skip-link">
           {copy.skip}
         </a>
-        <FunnelRail locale={raw} />
-        <SiteHeader locale={raw} />
+        <HudNav locale={raw} />
         {children}
         <DeferredToaster />
       </body>

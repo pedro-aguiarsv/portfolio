@@ -44,7 +44,7 @@ export function HeroField() {
             const span = Math.hypot(a.x - b.x, a.y - b.y)
             if (span > 52) continue
             const alpha = (1 - span / 52) * (1 - ad / REACH) * 0.42
-            ctx.strokeStyle = `rgba(214, 255, 63, ${alpha})`
+            ctx.strokeStyle = `rgba(126, 231, 255, ${alpha})`
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)
             ctx.lineTo(b.x, b.y)
@@ -59,9 +59,9 @@ export function HeroField() {
             ? Math.max(0, 1 - Math.hypot(dot.hx - pointer.x, dot.hy - pointer.y) / REACH)
             : 0
         const radius = (dot.accent ? 1.8 : 1.15) + near * 1.1
-        if (dot.accent === 1) ctx.fillStyle = `rgba(214, 255, 63, ${0.55 + near * 0.4})`
-        else if (dot.accent === 2) ctx.fillStyle = `rgba(226, 61, 43, ${0.4 + near * 0.35})`
-        else ctx.fillStyle = `rgba(237, 230, 214, ${0.2 + near * 0.55})`
+        if (dot.accent === 1) ctx.fillStyle = `rgba(126, 231, 255, ${0.7 + near * 0.3})`
+        else if (dot.accent === 2) ctx.fillStyle = `rgba(226, 177, 90, ${0.55 + near * 0.35})`
+        else ctx.fillStyle = `rgba(186, 214, 232, ${0.22 + near * 0.5})`
         ctx.beginPath()
         ctx.arc(dot.x, dot.y, radius, 0, Math.PI * 2)
         ctx.fill()

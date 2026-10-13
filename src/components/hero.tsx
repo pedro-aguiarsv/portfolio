@@ -4,7 +4,59 @@ import { Button } from "@/components/ui/button"
 
 function Crop({ className }: { className: string }) {
   return (
-    <span aria-hidden="true" className={`absolute size-4 border-muted-foreground/50 ${className}`} />
+    <span aria-hidden="true" className={`absolute size-4 border-highlighter/70 ${className}`} />
+  )
+}
+
+function Reactor() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute top-14 -right-[34%] z-0 size-[88vw] max-w-[460px] md:top-1/2 md:-right-[4%] md:size-[min(76vh,720px)] md:max-w-none md:-translate-y-1/2"
+    >
+      <div className="absolute inset-[22%] rounded-full bg-[radial-gradient(circle,rgb(126_231_255/0.16),transparent_68%)]" />
+      <svg viewBox="0 0 400 400" className="h-full w-full">
+        <circle cx="200" cy="200" r="188" fill="none" stroke="rgb(126 231 255 / 0.2)" strokeWidth="1" />
+        <g className="hud-spin">
+          <circle
+            cx="200"
+            cy="200"
+            r="164"
+            fill="none"
+            stroke="rgb(126 231 255 / 0.72)"
+            strokeWidth="1.25"
+            strokeDasharray="48 18 12 140"
+          />
+          <circle
+            cx="200"
+            cy="200"
+            r="164"
+            fill="none"
+            stroke="rgb(226 177 90 / 0.85)"
+            strokeWidth="2"
+            strokeDasharray="10 340"
+          />
+        </g>
+        <g className="hud-spin-rev">
+          <circle
+            cx="200"
+            cy="200"
+            r="126"
+            fill="none"
+            stroke="rgb(126 231 255 / 0.4)"
+            strokeWidth="1"
+            strokeDasharray="2 9"
+          />
+        </g>
+        <circle cx="200" cy="200" r="78" fill="none" stroke="rgb(126 231 255 / 0.28)" strokeWidth="1" />
+        <circle cx="200" cy="200" r="5" fill="rgb(126 231 255 / 0.95)" />
+        <path
+          d="M200 22 V48 M200 352 V378 M22 200 H48 M352 200 H378"
+          stroke="rgb(126 231 255 / 0.5)"
+          strokeWidth="1"
+        />
+      </svg>
+    </div>
   )
 }
 
@@ -14,12 +66,13 @@ export function Hero({ locale }: { locale: Locale }) {
   return (
     <section
       id="impressao"
-      className="relative flex min-h-[100svh] w-full max-w-full min-w-0 flex-col overflow-hidden px-5 pt-24 pb-16 md:pr-14 md:pl-28"
+      className="relative flex min-h-[100svh] w-full max-w-full min-w-0 flex-col overflow-hidden px-5 pt-24 pb-16 md:pr-14 md:pl-64"
     >
       <HeroField />
-      <Crop className="top-20 left-5 z-10 border-t border-l md:left-28" />
+      <Reactor />
+      <Crop className="top-20 left-5 z-10 border-t border-l md:left-64" />
       <Crop className="top-20 right-5 z-10 border-t border-r md:right-14" />
-      <Crop className="bottom-6 left-5 z-10 border-b border-l md:left-28" />
+      <Crop className="bottom-6 left-5 z-10 border-b border-l md:left-64" />
       <Crop className="right-5 bottom-6 z-10 border-r border-b md:right-14" />
 
       <p className="relative z-10 font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
@@ -41,7 +94,7 @@ export function Hero({ locale }: { locale: Locale }) {
           <div className="flex min-h-12 flex-wrap items-center gap-x-6 gap-y-3">
             <Button
               asChild
-              className="h-12 rounded-none px-5 font-mono text-xs tracking-[0.14em] uppercase hover:bg-[#e7ff73]"
+              className="h-12 rounded-none px-5 font-mono text-xs tracking-[0.14em] uppercase shadow-[0_0_24px_rgb(126_231_255/0.28)] hover:bg-[#bff4ff]"
             >
               <a href="#conversao">{copy.cta}</a>
             </Button>

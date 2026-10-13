@@ -24,8 +24,8 @@ export default async function OpenGraphImage({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#12110e",
-          color: "#ede6d6",
+          background: "#070b12",
+          color: "#e7f2fb",
           padding: 72,
         }}
       >
@@ -36,8 +36,8 @@ export default async function OpenGraphImage({
         <div
           style={{
             display: "flex",
-            background: "#d6ff3f",
-            color: "#16140f",
+            background: "#7ee7ff",
+            color: "#041018",
             fontSize: 28,
             padding: "16px 22px",
             alignSelf: "flex-start",

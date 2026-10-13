@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
 const fieldClass =
-  "h-12 rounded-none border-ink/25 bg-transparent text-base text-ink placeholder:text-ink/45 focus-visible:border-ink focus-visible:ring-ink/20 md:text-base"
+  "h-12 rounded-none border-foreground/25 bg-transparent text-base text-foreground placeholder:text-foreground/40 focus-visible:border-highlighter focus-visible:ring-highlighter/25 md:text-base"
 
 export function Contact({ locale }: { locale: Locale }) {
   const page = getCopy(locale)
@@ -59,7 +59,7 @@ export function Contact({ locale }: { locale: Locale }) {
   ]
 
   return (
-    <section id="conversao" className="scroll-mt-24 px-5 py-24 md:py-32 md:pr-14 md:pl-28">
+    <section id="conversao" className="scroll-mt-24 px-5 py-24 md:py-32 md:pr-14 md:pl-64">
       <div className="grid items-start gap-12 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <p className="font-mono text-[11px] tracking-[0.2em] text-highlighter uppercase">
@@ -89,7 +89,7 @@ export function Contact({ locale }: { locale: Locale }) {
           </ul>
         </div>
 
-        <div className="bg-paper px-6 py-8 text-ink md:px-10 md:py-12 lg:col-span-6 lg:col-start-7">
+        <div className="hud-frame px-6 py-8 text-foreground md:px-10 md:py-12 lg:col-span-6 lg:col-start-7">
           {sent ? (
             <div aria-live="polite">
               {Stamp ? (
@@ -114,12 +114,12 @@ export function Contact({ locale }: { locale: Locale }) {
                 </div>
               </dl>
               <p className="mt-8 font-serif text-2xl leading-snug italic">{copy.receipt.body}</p>
-              <p className="mt-4 text-sm text-ink/70">{copy.receipt.note}</p>
+              <p className="mt-4 text-sm text-foreground/70">{copy.receipt.note}</p>
             </div>
           ) : (
             <>
               <h3 className="font-serif text-3xl">{copy.formTitle}</h3>
-              <p className="mt-2 text-sm text-ink/70">{copy.support}</p>
+              <p className="mt-2 text-sm text-foreground/70">{copy.support}</p>
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
@@ -131,7 +131,7 @@ export function Contact({ locale }: { locale: Locale }) {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-mono text-[11px] tracking-[0.14em] text-ink uppercase">
+                        <FormLabel className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
                           {copy.fields.name}
                         </FormLabel>
                         <FormControl>
@@ -151,7 +151,7 @@ export function Contact({ locale }: { locale: Locale }) {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-mono text-[11px] tracking-[0.14em] text-ink uppercase">
+                        <FormLabel className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
                           {copy.fields.email}
                         </FormLabel>
                         <FormControl>
@@ -172,7 +172,7 @@ export function Contact({ locale }: { locale: Locale }) {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-mono text-[11px] tracking-[0.14em] text-ink uppercase">
+                        <FormLabel className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
                           {copy.fields.message}
                         </FormLabel>
                         <FormControl>
@@ -190,7 +190,7 @@ export function Contact({ locale }: { locale: Locale }) {
                   <Button
                     type="submit"
                     disabled={form.formState.isSubmitting}
-                    className="h-12 rounded-none bg-ink px-5 font-mono text-xs tracking-[0.14em] text-paper uppercase hover:bg-ink/85"
+                    className="h-12 rounded-none px-5 font-mono text-xs tracking-[0.14em] uppercase shadow-[0_0_24px_rgb(126_231_255/0.22)] hover:bg-[#bff4ff]"
                   >
                     {form.formState.isSubmitting ? copy.sending : page.cta}
                   </Button>
