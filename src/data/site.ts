@@ -94,7 +94,7 @@ export type Copy = {
       message: string
     }
     placeholders: { name: string; email: string; message: string }
-    errors: { name: string; email: string; message: string }
+    errors: { name: string; email: string; message: string; send: string }
     receipt: {
       title: string
       event: string
@@ -211,7 +211,7 @@ const copy = {
           label: "Formação",
           value: "Engenharia de Software, PUC Minas. 2º período, 2026—2029.",
         },
-        { label: "Atuação", value: "Desenvolvimento, CRM e automação." },
+        { label: "Atuação", value: "IA, Desenvolvimento, CRM e Automação." },
         {
           label: "Interesse",
           value: "Front-end, back-end, automações e IA.",
@@ -327,6 +327,7 @@ const copy = {
         name: "Sem nome eu não sei quem responde.",
         email: "E-mail incompleto.",
         message: "Uma frase. O que é a vaga ou o projeto?",
+        send: "Não saiu. Confere o EmailJS e tenta de novo.",
       },
       receipt: {
         title: "Convertido",
@@ -387,7 +388,7 @@ const copy = {
           label: "Education",
           value: "Software Engineering, PUC Minas. 2nd term, 2026—2029.",
         },
-        { label: "Work", value: "Development, CRM, and automation." },
+        { label: "Work", value: "AI, development, CRM, and automation." },
         {
           label: "Interest",
           value: "Front-end, back-end, automation, and AI.",
@@ -498,6 +499,7 @@ const copy = {
         name: "No name, and I don't know who I'm answering.",
         email: "That email is incomplete.",
         message: "One sentence. What is the role or the project?",
+        send: "It did not go out. Check EmailJS and try again.",
       },
       receipt: {
         title: "Converted",

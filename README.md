@@ -1,43 +1,89 @@
 # Pedro Aguiar
 
-Portfólio pessoal. Uma página, dois idiomas, organizado como um funil: impressão, qualificação, prova, objeção, conversão.
+Portfólio profissional para a disciplina DIAW, Engenharia de Software, PUC Minas. O site apresenta trajetória, projetos, experiências e contato em português e inglês.
+
+O nome fica no núcleo. Sobre, Projetos, Experiência e Contato são círculos ligados a ele. O clique abre a janela daquele tema.
+
+Repositório: [github.com/pedro-aguiarsv/portfolio](https://github.com/pedro-aguiarsv/portfolio)
+
+O endereço publicado entra aqui depois do deploy na Vercel.
+
+## Status
+
+Site local funcional. O formulário envia e-mail pelo EmailJS quando as chaves estão no ambiente. A publicação na nuvem ainda não foi feita.
+
+## Funcionalidades
+
+- Sobre, com formação, atuação, interesses, objetivo e foto, em português e inglês
+- Projetos do mais antigo ao mais recente, com descrição, tecnologias e links quando existem
+- Experiências com empresa, cargo, período e descrição
+- Contato com e-mail, WhatsApp, LinkedIn e GitHub
+- Formulário de nome, e-mail e mensagem, com validação e envio por EmailJS
+- Layout responsivo
 
 ## Tecnologias
 
-- Next.js (App Router) + React + TypeScript
-- Tailwind CSS
-- shadcn/ui (Button, Sheet, Input, Textarea, Form, Label)
-- Framer Motion
-- React Hook Form + Zod
-- npm
+- Next.js 16 (App Router) e React 19
+- TypeScript
+- Tailwind CSS 4
+- shadcn/ui e Radix
+- React Hook Form e Zod
+- Framer Motion, carregado só depois do envio do formulário
+- EmailJS (`@emailjs/browser`)
+- Sonner
 
-O envio do formulário ainda é simulado. O comentário `TODO Sprint 02: EmailJS` marca onde o e-mail real entra.
+Não há back-end nem banco. O envio do formulário sai do navegador pelo EmailJS.
 
-## Como rodar
+## Instalação e execução
 
 Node 20 ou mais novo.
 
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
-Abra [http://localhost:3000/pt](http://localhost:3000/pt). A versão em inglês fica em `/en`.
+Abra [http://localhost:3000/pt](http://localhost:3000/pt). Inglês: `/en`.
 
 ```bash
 npm run build
 npm start
 ```
 
-Na publicação, defina `NEXT_PUBLIC_SITE_URL` com o endereço final. Ele entra no canonical, no Open Graph e no sitemap.
+### Variáveis de ambiente
+
+| Variável | Uso |
+| --- | --- |
+| `NEXT_PUBLIC_EMAILJS_SERVICE_ID` | Serviço do EmailJS |
+| `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | Template com `from_name`, `from_email`, `message`, `reply_to` |
+| `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` | Chave pública do EmailJS |
+| `NEXT_PUBLIC_SITE_URL` | Endereço final, usado no canonical, Open Graph e sitemap |
 
 ## Estrutura
 
 ```text
-src/app/[locale]          páginas, metadata e Open Graph
-src/components            seções e componentes de interface
-src/components/ui         primitives do shadcn/ui
-src/data/site.ts          textos em português e inglês, projetos e experiências
+public/pedro-aguiar.jpg          foto
+src/app/[locale]                 páginas, metadata e Open Graph
+src/components/orbit-hub.tsx     núcleo, círculos e janelas
+src/components/hud-nav.tsx       topo
+src/components/site-footer.tsx   rodapé e links das seções
+src/components                   seções de cada janela
+src/components/ui                primitives do shadcn/ui
+src/data/site.ts                 textos, projetos e experiências
+.env.example                     modelo das variáveis
 ```
 
-Para editar copy, projetos ou experiências, mexa só em `src/data/site.ts`.
+Para editar copy, projetos ou experiências, mexa em `src/data/site.ts`.
+
+## Demonstração
+
+<img src="public/pedro-aguiar.jpg" alt="Pedro Aguiar" width="280">
+
+## Autor
+
+Pedro Aguiar Gouvea. Engenharia de Software, PUC Minas, 2º período. Nova Lima.
+
+- GitHub: [pedro-aguiarsv](https://github.com/pedro-aguiarsv)
+- LinkedIn: [pedroaguiargouvea](https://www.linkedin.com/in/pedroaguiargouvea/)
+- E-mail: pedro.asvgouvea@gmail.com

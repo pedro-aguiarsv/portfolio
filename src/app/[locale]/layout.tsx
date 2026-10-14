@@ -6,7 +6,7 @@ import { getCopy, isLocale, siteUrl, type Locale } from "@/data/site"
 import "../globals.css"
 
 export const viewport: Viewport = {
-  themeColor: "#070b12",
+  themeColor: "#04070d",
 }
 
 export function generateStaticParams() {

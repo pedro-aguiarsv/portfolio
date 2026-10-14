@@ -5,17 +5,22 @@ export function About({ locale }: { locale: Locale }) {
   const copy = getCopy(locale).about
 
   return (
-    <section id="qualificacao" className="scroll-mt-24 px-5 py-24 md:py-32 md:pr-14 md:pl-64">
+    <section id="qualificacao">
       <Reveal>
         <p className="font-mono text-[11px] tracking-[0.2em] text-highlighter uppercase">
           {copy.kicker}
         </p>
-        <div className="mt-6 grid gap-12 md:grid-cols-12">
-          <h2 className="font-serif text-4xl leading-[0.95] font-normal tracking-[-0.03em] md:col-span-5 md:text-6xl">
-            {copy.title}
-          </h2>
-          <div className="md:col-span-6 md:col-start-7">
-            <div className="space-y-5 text-base leading-relaxed text-foreground/90">
+        <div className="mt-6 grid items-start gap-10 md:grid-cols-[minmax(0,16rem)_1fr]">
+          <img
+            src="/pedro-aguiar.jpg"
+            alt="Pedro Aguiar"
+            className="aspect-[4/5] w-full max-w-[16rem] object-cover object-[center_18%] shadow-[0_0_32px_rgb(60_224_255/0.18)] ring-1 ring-highlighter/55"
+          />
+          <div>
+            <h2 className="font-serif text-4xl leading-[0.95] font-normal tracking-[-0.03em] md:text-6xl">
+              {copy.title}
+            </h2>
+            <div className="mt-6 space-y-5 text-base leading-relaxed text-foreground/90">
               {copy.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}

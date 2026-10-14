@@ -38,16 +38,41 @@ export function Contact({ locale }: { locale: Locale }) {
     defaultValues: { name: "", email: "", message: "" },
   })
 
-  async function onSubmit() {
-    const [stampMod] = await Promise.all([
+  async function onSubmit(values: { name: string; email: string; message: string }) {
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+    const [{ Stamp: StampMark }, emailjs] = await Promise.all([
       import("@/components/stamp"),
-      new Promise((resolve) => setTimeout(resolve, 700)),
+      import("@emailjs/browser"),
       ensureToaster(),
     ])
-    // TODO Sprint 02: EmailJS
-    setStamp(() => stampMod.Stamp)
-    setSent(true)
     const { toast } = await import("sonner")
+
+    if (!serviceId || !templateId || !publicKey) {
+      toast.error(copy.errors.send)
+      return
+    }
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: values.name,
+          from_email: values.email,
+          message: values.message,
+          reply_to: values.email,
+        },
+        { publicKey },
+      )
+    } catch {
+      toast.error(copy.errors.send)
+      return
+    }
+
+    setStamp(() => StampMark)
+    setSent(true)
     toast.success(copy.toast)
   }
 
@@ -59,7 +84,7 @@ export function Contact({ locale }: { locale: Locale }) {
   ]
 
   return (
-    <section id="conversao" className="scroll-mt-24 px-5 py-24 md:py-32 md:pr-14 md:pl-64">
+    <section id="conversao">
       <div className="grid items-start gap-12 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <p className="font-mono text-[11px] tracking-[0.2em] text-highlighter uppercase">

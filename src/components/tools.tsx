@@ -5,7 +5,7 @@ export function Tools({ locale }: { locale: Locale }) {
   const copy = getCopy(locale).tools
 
   return (
-    <section id="ferramentas" className="scroll-mt-24 border-y border-border px-5 py-16 md:pr-14 md:pl-64">
+    <section id="ferramentas" className="mt-12 border-t border-border pt-10">
       <Reveal>
         <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
           {copy.kicker}

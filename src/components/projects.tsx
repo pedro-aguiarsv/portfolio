@@ -5,7 +5,7 @@ export function Projects({ locale }: { locale: Locale }) {
   const copy = getCopy(locale).projects
 
   return (
-    <section id="prova" className="scroll-mt-24 px-5 py-24 md:py-32 md:pr-14 md:pl-64">
+    <section id="prova">
       <Reveal>
         <div className="flex items-end justify-between gap-6">
           <p className="font-mono text-[11px] tracking-[0.2em] text-highlighter uppercase">

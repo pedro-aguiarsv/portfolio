@@ -2,9 +2,9 @@ import dynamic from "next/dynamic"
 import { notFound } from "next/navigation"
 import { About } from "@/components/about"
 import { Experience } from "@/components/experience"
-import { Hero } from "@/components/hero"
-import { Projects } from "@/components/projects"
+import { OrbitHub } from "@/components/orbit-hub"
 import { SiteFooter } from "@/components/site-footer"
+import { Projects } from "@/components/projects"
 import { Tools } from "@/components/tools"
 import { getCopy, isLocale, profile, siteUrl } from "@/data/site"
 
@@ -36,6 +36,7 @@ export default async function Page({
       "@type": "CollegeOrUniversity",
       name: "PUC Minas",
     },
+    image: `${siteUrl}/pedro-aguiar.jpg`,
     sameAs: [profile.linkedin, profile.github],
     knowsAbout: copy.tools.groups.flatMap((group) => group.items),
   }
@@ -47,12 +48,20 @@ export default async function Page({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main id="conteudo">
-        <Hero locale={raw} />
-        <About locale={raw} />
-        <Projects locale={raw} />
-        <Tools locale={raw} />
-        <Experience locale={raw} />
-        <Contact locale={raw} />
+        <OrbitHub
+          locale={raw}
+          panels={{
+            about: (
+              <>
+                <About locale={raw} />
+                <Tools locale={raw} />
+              </>
+            ),
+            projects: <Projects locale={raw} />,
+            experience: <Experience locale={raw} />,
+            contact: <Contact locale={raw} />,
+          }}
+        />
       </main>
       <SiteFooter locale={raw} />
     </>

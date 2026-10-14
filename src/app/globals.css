@@ -70,7 +70,7 @@
   --font-heading: var(--font-newsreader), ui-serif, Georgia, serif;
   --color-paper: #0c1824;
   --color-ink: #041018;
-  --color-highlighter: #7ee7ff;
+  --color-highlighter: #3ce0ff;
   --color-stamp: #ff5d4a;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -114,25 +114,25 @@
   --font-familjen: "Familjen Grotesk", "Familjen Grotesk Fallback";
   --font-newsreader: "Newsreader", "Newsreader Fallback";
   --font-plex: "IBM Plex Mono", "IBM Plex Mono Fallback";
-  --background: #070b12;
-  --foreground: #e7f2fb;
-  --card: #0c1622;
-  --card-foreground: #e7f2fb;
-  --popover: #0c1622;
-  --popover-foreground: #e7f2fb;
-  --primary: #7ee7ff;
+  --background: #04070d;
+  --foreground: #e7f6ff;
+  --card: #071019;
+  --card-foreground: #e7f6ff;
+  --popover: #071019;
+  --popover-foreground: #e7f6ff;
+  --primary: #3ce0ff;
   --primary-foreground: #041018;
   --secondary: #101c2a;
   --secondary-foreground: #e7f2fb;
   --muted: #101c2a;
   --muted-foreground: #c5d4e2;
-  --accent: #7ee7ff;
+  --accent: #3ce0ff;
   --accent-foreground: #041018;
   --destructive: #ff5d4a;
-  --border: #1c3044;
-  --input: #24384e;
-  --ring: #7ee7ff;
-  --chart-1: #7ee7ff;
+  --border: #163044;
+  --input: #1c3a50;
+  --ring: #3ce0ff;
+  --chart-1: #3ce0ff;
   --chart-2: #c5d4e2;
   --chart-3: #e2b15a;
   --chart-4: #6e879c;
@@ -140,12 +140,12 @@
   --radius: 0px;
   --sidebar: #0c1622;
   --sidebar-foreground: #e7f2fb;
-  --sidebar-primary: #7ee7ff;
+  --sidebar-primary: #3ce0ff;
   --sidebar-primary-foreground: #041018;
   --sidebar-accent: #101c2a;
-  --sidebar-accent-foreground: #e7f2fb;
-  --sidebar-border: #1c3044;
-  --sidebar-ring: #7ee7ff;
+  --sidebar-accent-foreground: #e7f6ff;
+  --sidebar-border: #163044;
+  --sidebar-ring: #3ce0ff;
 }
 
 @layer base {
@@ -161,11 +161,11 @@
     @apply bg-background text-foreground;
     overflow-x: clip;
     background-image:
-      radial-gradient(ellipse 55% 42% at 82% 18%, rgb(126 231 255 / 0.09), transparent 58%),
-      radial-gradient(ellipse 40% 36% at 8% 80%, rgb(226 177 90 / 0.05), transparent 52%);
+      radial-gradient(circle at 50% 46%, rgb(60 224 255 / 0.08), transparent 34%),
+      radial-gradient(circle at 50% 50%, transparent 40%, rgb(0 0 0 / 0.45) 100%);
   }
   ::selection {
-    background: #7ee7ff;
+    background: #3ce0ff;
     color: #041018;
   }
 }
@@ -175,7 +175,7 @@
   left: 1rem;
   top: -4rem;
   z-index: 80;
-  background: #7ee7ff;
+  background: #3ce0ff;
   color: #041018;
   padding: 0.5rem 0.75rem;
   font-family: var(--font-mono), ui-monospace, monospace;
@@ -220,30 +220,106 @@
 }
 
 .hud-frame {
-  border: 1px solid rgb(126 231 255 / 0.22);
+  border: 1px solid rgb(60 224 255 / 0.28);
   background:
-    linear-gradient(180deg, rgb(126 231 255 / 0.05), transparent 28%),
-    rgb(8 16 26 / 0.72);
-  box-shadow: inset 0 0 0 1px rgb(126 231 255 / 0.04);
+    linear-gradient(180deg, rgb(60 224 255 / 0.07), transparent 22%),
+    rgb(4 10 16 / 0.88);
+  box-shadow:
+    0 0 40px rgb(60 224 255 / 0.08),
+    inset 0 0 0 1px rgb(60 224 255 / 0.05);
+}
+
+.hud-grid {
+  background-image:
+    linear-gradient(rgb(60 224 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(60 224 255 / 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at 50% 48%, black 20%, transparent 74%);
 }
 
 .hud-spin,
-.hud-spin-rev {
+.hud-spin-rev,
+.hud-spin-slow,
+.hud-spin-mid,
+.hud-spin-fast,
+.gauge-ring {
   transform-box: fill-box;
   transform-origin: center;
 }
 
 .hud-spin {
-  animation: hud-spin 42s linear infinite;
+  animation: hud-spin 36s linear infinite;
 }
 
 .hud-spin-rev {
-  animation: hud-spin 68s linear infinite reverse;
+  animation: hud-spin 54s linear infinite reverse;
+}
+
+.hud-spin-slow {
+  animation: hud-spin 28s linear infinite;
+}
+
+.hud-spin-mid {
+  animation: hud-spin 18s linear infinite reverse;
+}
+
+.hud-spin-fast {
+  animation: hud-spin 9s linear infinite;
+}
+
+.gauge-ring {
+  animation: hud-spin 14s linear infinite;
+}
+
+.hud-sweep {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 250deg,
+    rgb(60 224 255 / 0.02) 300deg,
+    rgb(60 224 255 / 0.38) 360deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 46%, black 50%, black 78%, transparent 82%);
+  mask: radial-gradient(circle, transparent 46%, black 50%, black 78%, transparent 82%);
+  animation: hud-spin 7.5s linear infinite;
+}
+
+.hud-breathe {
+  animation: hud-breathe 4.8s ease-in-out infinite;
+}
+
+.hud-live {
+  animation: hud-breathe 2.4s ease-in-out infinite;
+}
+
+.hud-flow {
+  animation: hud-flow 2.4s linear infinite;
+}
+
+.gauge:hover .gauge-ring,
+.gauge:focus-visible .gauge-ring {
+  animation-duration: 4.5s;
 }
 
 @keyframes hud-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes hud-breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes hud-flow {
+  to {
+    stroke-dashoffset: -36;
   }
 }
 
@@ -254,7 +330,15 @@
   .rise,
   .stamp-in,
   .hud-spin,
-  .hud-spin-rev {
+  .hud-spin-rev,
+  .hud-spin-slow,
+  .hud-spin-mid,
+  .hud-spin-fast,
+  .gauge-ring,
+  .hud-sweep,
+  .hud-breathe,
+  .hud-live,
+  .hud-flow {
     animation: none;
   }
 }
