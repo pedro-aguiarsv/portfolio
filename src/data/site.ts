@@ -163,10 +163,13 @@ const copy = {
           problem:
             "Pequenos vendedores precisam de uma loja própria com pagamento e frete funcionando, sem montar tudo do zero.",
           built:
-            "SaaS de e-commerce white-label multi-tenant: pagamento com Mercado Pago Checkout Bricks, split de pagamento e frete pelo Melhor Envio, com OAuth por vendedor.",
-          stack: ["Multi-tenant", "Mercado Pago", "Melhor Envio", "OAuth"],
-          links: [],
-          note: "Código privado.",
+            "SaaS de e-commerce white-label multi-tenant: Checkout Bricks com split (application_fee), frete Correios ou Melhor Envio com OAuth por vendedor, e isolamento por storeId. A vitrine pública é a Casa Lume, uma loja fictícia.",
+          stack: ["Next.js 16", "Prisma", "Neon", "Mercado Pago", "Melhor Envio", "Correios"],
+          links: [
+            { label: "Demo", href: "https://storeon.up.railway.app/store/loja-demo" },
+            { label: "Vitrine", href: "https://github.com/pedro-aguiarsv/store-on-showcase" },
+          ],
+          note: "Código do produto é privado.",
         },
         {
           name: "(In)finitudes",
@@ -375,10 +378,13 @@ const copy = {
           problem:
             "Small sellers need their own store with payments and shipping working, without building everything from scratch.",
           built:
-            "White-label multi-tenant e-commerce SaaS: payments with Mercado Pago Checkout Bricks, payment split and shipping through Melhor Envio, with OAuth per seller.",
-          stack: ["Multi-tenant", "Mercado Pago", "Melhor Envio", "OAuth"],
-          links: [],
-          note: "Private code.",
+            "White-label multi-tenant e-commerce SaaS: Checkout Bricks with a payment split (application_fee), Correios or Melhor Envio shipping with OAuth per seller, and storeId isolation. The public storefront is Casa Lume, a fictional shop.",
+          stack: ["Next.js 16", "Prisma", "Neon", "Mercado Pago", "Melhor Envio", "Correios"],
+          links: [
+            { label: "Demo", href: "https://storeon.up.railway.app/store/loja-demo" },
+            { label: "Showcase", href: "https://github.com/pedro-aguiarsv/store-on-showcase" },
+          ],
+          note: "Product code is private.",
         },
         {
           name: "(In)finitudes",
