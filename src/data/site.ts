@@ -167,6 +167,7 @@ const copy = {
           stack: ["Next.js 16", "Prisma", "Neon", "Mercado Pago", "Melhor Envio", "Correios"],
           links: [
             { label: "Demo", href: "https://storeon.up.railway.app/store/loja-demo" },
+            { label: "Vídeo", href: "https://github.com/pedro-aguiarsv/store-on-showcase/blob/master/docs/compra.mp4" },
             { label: "Vitrine", href: "https://github.com/pedro-aguiarsv/store-on-showcase" },
           ],
           note: "Código do produto é privado.",
@@ -382,6 +383,7 @@ const copy = {
           stack: ["Next.js 16", "Prisma", "Neon", "Mercado Pago", "Melhor Envio", "Correios"],
           links: [
             { label: "Demo", href: "https://storeon.up.railway.app/store/loja-demo" },
+            { label: "Video", href: "https://github.com/pedro-aguiarsv/store-on-showcase/blob/master/docs/compra.mp4" },
             { label: "Showcase", href: "https://github.com/pedro-aguiarsv/store-on-showcase" },
           ],
           note: "Product code is private.",
