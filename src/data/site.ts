@@ -133,8 +133,11 @@ const copy = {
           built:
             "App de treino e saúde mobile-first (PWA) com bot no Telegram e um assistente de IA que lê o histórico do usuário. Integra dados do Garmin por cron.",
           stack: ["Next.js 16", "TypeScript", "Drizzle", "Neon Postgres", "Gemini", "Telegram"],
-          links: [{ label: "Ver no ar", href: "https://bot-health.vercel.app" }],
-          note: "Código privado.",
+          links: [
+            { label: "Ver no ar", href: "https://bot-health.vercel.app" },
+            { label: "Vitrine e vídeo", href: "https://github.com/pedro-aguiarsv/bot-health-showcase" },
+          ],
+          note: "Código-fonte privado (dados de saúde).",
         },
         {
           name: "Pipeline de prospecção com IA",
@@ -144,8 +147,8 @@ const copy = {
           built:
             "Pipeline que mapeia, enriquece e pontua leads e gera mensagens personalizadas com a API do Gemini.",
           stack: ["Python", "SQLite", "Gemini API"],
-          links: [],
-          note: "Código privado.",
+          links: [{ label: "Repositório", href: "https://github.com/pedro-aguiarsv/prospecting-pipeline" }],
+          note: "Versão pública, com dados sintéticos.",
         },
         {
           name: "Alerta de receita",
@@ -349,8 +352,11 @@ const copy = {
           built:
             "Mobile-first workout and health app (PWA) with a Telegram bot and an AI assistant that reads the user's history. It pulls Garmin data through a cron job.",
           stack: ["Next.js 16", "TypeScript", "Drizzle", "Neon Postgres", "Gemini", "Telegram"],
-          links: [{ label: "View live", href: "https://bot-health.vercel.app" }],
-          note: "Private code.",
+          links: [
+            { label: "View live", href: "https://bot-health.vercel.app" },
+            { label: "Showcase and video", href: "https://github.com/pedro-aguiarsv/bot-health-showcase" },
+          ],
+          note: "Source code is private (health data).",
         },
         {
           name: "AI prospecting pipeline",
@@ -360,8 +366,8 @@ const copy = {
           built:
             "Pipeline that maps, enriches and scores leads and writes personalised messages with the Gemini API.",
           stack: ["Python", "SQLite", "Gemini API"],
-          links: [],
-          note: "Private code.",
+          links: [{ label: "Repository", href: "https://github.com/pedro-aguiarsv/prospecting-pipeline" }],
+          note: "Public version, with synthetic data.",
         },
         {
           name: "Revenue alert",
