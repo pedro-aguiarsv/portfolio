@@ -2,10 +2,10 @@ import dynamic from "next/dynamic"
 import { notFound } from "next/navigation"
 import { About } from "@/components/about"
 import { Experience } from "@/components/experience"
-import { OrbitHub } from "@/components/orbit-hub"
-import { SiteFooter } from "@/components/site-footer"
+import { Hero } from "@/components/hero"
 import { Projects } from "@/components/projects"
-import { Tools } from "@/components/tools"
+import { SiteFooter } from "@/components/site-footer"
+import { Skills } from "@/components/skills"
 import { getCopy, isLocale, profile, siteUrl } from "@/data/site"
 
 const Contact = dynamic(() => import("@/components/contact").then((mod) => mod.Contact))
@@ -25,7 +25,7 @@ export default async function Page({
     name: profile.fullName,
     email: profile.email,
     url: `${siteUrl}/${raw}`,
-    jobTitle: raw === "pt" ? "Coordenador de Retenção" : "Retention Coordinator",
+    jobTitle: raw === "pt" ? "Fundador e estudante de Engenharia de Software" : "Founder and Software Engineering student",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Nova Lima",
@@ -38,7 +38,7 @@ export default async function Page({
     },
     image: `${siteUrl}/pedro-aguiar.jpg`,
     sameAs: [profile.linkedin, profile.github],
-    knowsAbout: copy.tools.groups.flatMap((group) => group.items),
+    knowsAbout: copy.skills.groups.flatMap((group) => group.items),
   }
 
   return (
@@ -48,20 +48,12 @@ export default async function Page({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main id="conteudo">
-        <OrbitHub
-          locale={raw}
-          panels={{
-            about: (
-              <>
-                <About locale={raw} />
-                <Tools locale={raw} />
-              </>
-            ),
-            projects: <Projects locale={raw} />,
-            experience: <Experience locale={raw} />,
-            contact: <Contact locale={raw} />,
-          }}
-        />
+        <Hero locale={raw} />
+        <Projects locale={raw} />
+        <Experience locale={raw} />
+        <Skills locale={raw} />
+        <About locale={raw} />
+        <Contact locale={raw} />
       </main>
       <SiteFooter locale={raw} />
     </>

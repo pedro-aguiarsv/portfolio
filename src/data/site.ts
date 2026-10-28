@@ -6,7 +6,7 @@ export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale)
 }
 
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://pedroaguiar-psi.vercel.app"
 
 export const profile = {
   name: "Pedro Aguiar",
@@ -17,69 +17,62 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/pedroaguiargouvea/",
   github: "https://github.com/pedro-aguiarsv",
   location: "Nova Lima",
+  cv: { pt: "/Pedro_Aguiar_CV_PT.pdf", en: "/Pedro_Aguiar_CV_EN.pdf" },
 } as const
 
+type Link = { label: string; href: string }
+
 type Project = {
-  year: string
   name: string
-  summary: string
-  body: string
-  stack?: string[]
-  repo?: string
-  live?: string
-  featured?: boolean
-}
-
-type Role = {
-  title: string
-  period: string
-  summary: string
-  current?: boolean
-}
-
-type Experience = {
-  org: string
+  status: string
+  mvp?: boolean
+  problem: string
+  built: string
+  stack: string[]
+  links: Link[]
   note?: string
-  roles: Role[]
+}
+
+type Job = {
+  org: string
+  role: string
+  period: string
+  path?: string
+  bullets: string[]
 }
 
 export type Copy = {
   meta: { title: string; description: string }
   skip: string
-  cta: string
-  secondary: string
-  nav: { about: string; projects: string; experience: string; contact: string }
-  railLabel: string
-  menu: string
-  close: string
-  stages: { id: string; label: string }[]
-  hero: { kicker: string; lead: string; support: string }
+  nav: { projects: string; experience: string; skills: string; about: string; contact: string }
+  navLabel: string
+  hero: {
+    status: string
+    lead: string
+    support: string
+    projects: string
+    cvPt: string
+    cvEn: string
+    linkedin: string
+  }
+  projects: {
+    kicker: string
+    title: string
+    lead: string
+    problem: string
+    built: string
+    stack: string
+    items: Project[]
+  }
+  experience: { kicker: string; title: string; lead: string; jobs: Job[] }
+  skills: { kicker: string; title: string; lead: string; groups: { label: string; items: string[] }[] }
   about: {
     kicker: string
     title: string
     paragraphs: string[]
     facts: { label: string; value: string }[]
     awards: string
-  }
-  projects: {
-    kicker: string
-    title: string
-    lead: string
-    order: string
-    repo: string
-    live: string
-    items: Project[]
-  }
-  tools: {
-    kicker: string
-    title: string
-    groups: { label: string; items: string[] }[]
-  }
-  experience: {
-    kicker: string
-    title: string
-    lead: string
-    groups: Experience[]
+    photoAlt: string
   }
   contact: {
     kicker: string
@@ -88,235 +81,209 @@ export type Copy = {
     formTitle: string
     support: string
     sending: string
-    fields: {
-      name: string
-      email: string
-      message: string
-    }
+    send: string
+    fields: { name: string; email: string; message: string }
     placeholders: { name: string; email: string; message: string }
     errors: { name: string; email: string; message: string; send: string }
-    receipt: {
-      title: string
-      event: string
-      eventValue: string
-      source: string
-      sourceValue: string
-      reply: string
-      replyValue: string
-      note: string
-      body: string
-    }
+    done: { title: string; body: string }
     toast: string
   }
   footer: { line: string }
 }
 
-const projectsPt: Project[] = [
-  {
-    year: "2025",
-    name: "plausible_alerta",
-    stack: ["JavaScript"],
-    repo: "https://github.com/pedro-aguiarsv/plausible_alerta",
-    summary:
-      "Queda de tráfego descoberta no dia seguinte é relatório. No mesmo dia, é ação.",
-    body: "Um script coleta, compara a hora atual com as anteriores e marca a variação. O aviso sai quando o número desvia, não quando alguém lembra de abrir o painel.",
-  },
-  {
-    year: "2026",
-    name: "Prospecção",
-    summary: "Mensagem fria sem nada para mostrar é pedido. Com um mockup, é conversa.",
-    body: "Um script acha leads e gera mockups em escala. A abordagem chega com uma peça na frente, não com um parágrafo genérico.",
-  },
-  {
-    year: "2026",
-    name: "(In)finitudes",
-    featured: true,
-    stack: ["Astro", "TypeScript"],
-    repo: "https://github.com/pedro-aguiarsv/infinitudes-portal",
-    live: "https://infinitudes.com.br",
-    summary: "Livro, podcast e comunidade não podem morar em três links perdidos.",
-    body: "Portal do (In)finitudes, projeto cultural de Eleonora Santos sobre finitude, saúde e cuidados paliativos. Eu entrei no desenvolvimento técnico. O livro, o podcast Divã Infinito e o resto do acervo se encontram no mesmo lugar.",
-  },
-]
-
-const projectsEn: Project[] = [
-  {
-    year: "2025",
-    name: "plausible_alerta",
-    stack: ["JavaScript"],
-    repo: "https://github.com/pedro-aguiarsv/plausible_alerta",
-    summary: "A traffic drop found the next day is a report. The same day, it is an action.",
-    body: "A script collects, compares the current hour with the ones before it, and marks the swing. The alert fires when the number moves, not when someone remembers the dashboard.",
-  },
-  {
-    year: "2026",
-    name: "Outreach",
-    summary: "A cold note with nothing to show is a favor. With a mockup, it is a conversation.",
-    body: "A script finds leads and generates mockups at scale. The outreach arrives with a piece in front, not a generic paragraph.",
-  },
-  {
-    year: "2026",
-    name: "(In)finitudes",
-    featured: true,
-    stack: ["Astro", "TypeScript"],
-    repo: "https://github.com/pedro-aguiarsv/infinitudes-portal",
-    live: "https://infinitudes.com.br",
-    summary: "A book, a podcast, and a community cannot live on three lost links.",
-    body: "Portal for (In)finitudes, a cultural project by Eleonora Santos on finitude, health, and palliative care. I joined on the technical build. The book, the Divã Infinito podcast, and the rest of the archive meet in one place.",
-  },
-]
-
 const copy = {
   pt: {
     meta: {
-      title: "Pedro Aguiar — o caminho até o clique",
+      title: "Pedro Aguiar — Engenharia de Software, dados e automação",
       description:
-        "Pedro Aguiar, Nova Lima. Retenção, prospecção e portais. Disponível para vaga remota ou PJ.",
+        "Pedro Aguiar, Nova Lima. Estudante de Engenharia de Software (PUC Minas) e fundador da Vekt e da Toketow. Busca estágio ou vaga júnior em TI, remoto ou híbrido em BH.",
     },
     skip: "Pular para o conteúdo",
-    cta: "Quero conversar",
-    secondary: "Ver a prova",
+    navLabel: "Seções da página",
     nav: {
-      about: "Sobre",
       projects: "Projetos",
       experience: "Experiência",
+      skills: "Competências",
+      about: "Sobre",
       contact: "Contato",
     },
-    railLabel: "Etapas da página",
-    menu: "Menu",
-    close: "Fechar",
-    stages: [
-      { id: "impressao", label: "Impressão" },
-      { id: "qualificacao", label: "Qualificação" },
-      { id: "prova", label: "Prova" },
-      { id: "objecao", label: "Objeção" },
-      { id: "conversao", label: "Conversão" },
-    ],
     hero: {
-      kicker: "impressão · nova lima",
-      lead: "Você já entrou no funil.",
+      status: "Disponível para trabalho",
+      lead: "Construo sistemas que automatizam operação: do CRM ao código.",
       support:
-        "Coordenador de Retenção na Costa Ventures. Engenharia de Software na PUC Minas, 2º período. Vaga remota ou PJ.",
-    },
-    about: {
-      kicker: "qualificação",
-      title: "Chega de biografia. Direto ao ponto!",
-      paragraphs: [
-        "Pedro Aguiar, Nova Lima. Coordenador de Retenção na Costa Ventures, um publisher. Segundo período de Engenharia de Software na PUC Minas.",
-        "O trabalho de hoje é segurar assinante: e-mail, CRM, teste A/B, churn e LTV. A operação escala por fluxo, não por mais gente. Estou passando a construir isso em código, não só a operar.",
-        "Não procuro freela sem fim. Procuro vaga remota ou PJ, com dono claro e número na mesa.",
-      ],
-      facts: [
-        {
-          label: "Formação",
-          value: "Engenharia de Software, PUC Minas. 2º período, 2026—2029.",
-        },
-        { label: "Atuação", value: "IA, Desenvolvimento, CRM e Automação." },
-        {
-          label: "Interesse",
-          value: "Front-end, back-end, automações e IA.",
-        },
-        {
-          label: "Objetivo",
-          value:
-            "Uma cadeira remota, ou um PJ, em que o código mexe com quem fica e com quem chega.",
-        },
-      ],
-      awards:
-        "Ouro no Canguru de Matemática. Premiado na Olimpíada Brasileira de Matemática.",
+        "Estudante de Engenharia de Software na PUC Minas. Passei 2 anos na Costa Ventures, de estagiário a coordenador, e hoje sou fundador da Vekt e da Toketow. Foco em IA aplicada: automações que economizam horas e ferramentas no ar.",
+      projects: "Ver projetos",
+      cvPt: "Baixar currículo (PT)",
+      cvEn: "Download CV (EN)",
+      linkedin: "LinkedIn",
     },
     projects: {
-      kicker: "prova",
-      title: "Do mais antigo ao que está no ar.",
-      lead: "Três peças. Nenhuma é landing de curso.",
-      order: "antigo → recente",
-      repo: "Repositório",
-      live: "No ar",
-      items: projectsPt,
-    },
-    tools: {
-      kicker: "o que entra no funil",
-      title: "Ferramenta empilhada não é skill.",
-      groups: [
+      kicker: "Projetos",
+      title: "O que eu construí",
+      lead: "Seis projetos, os quatro primeiros com IA aplicada e automação em uso real. Cada um com o problema, o que foi feito e a stack.",
+      problem: "Problema",
+      built: "O que construí",
+      stack: "Stack",
+      items: [
         {
-          label: "Retenção",
-          items: ["E-mail", "CRM", "Teste A/B", "GA4", "GTM"],
+          name: "Bot Health",
+          status: "Em uso diário",
+          problem:
+            "Registrar treino e saúde exige vários apps, e nenhum responde com base no seu próprio histórico.",
+          built:
+            "App de treino e saúde mobile-first (PWA) com bot no Telegram e um assistente de IA que lê o histórico do usuário. Integra dados do Garmin por cron.",
+          stack: ["Next.js 16", "TypeScript", "Drizzle", "Neon Postgres", "Gemini", "Telegram"],
+          links: [{ label: "Ver no ar", href: "https://bot-health.vercel.app" }],
+          note: "Código privado.",
         },
-        { label: "Mídia", items: ["Google Ads"] },
         {
-          label: "Código",
-          items: ["JavaScript", "TypeScript", "Node.js", "Astro", "HTML", "CSS", "SQL"],
+          name: "Pipeline de prospecção com IA",
+          status: "Uso próprio",
+          problem:
+            "Prospectar comércio local à mão é lento, e mensagem genérica sem nada para mostrar não vira conversa.",
+          built:
+            "Pipeline que mapeia, enriquece e pontua leads e gera mensagens personalizadas com a API do Gemini.",
+          stack: ["Python", "SQLite", "Gemini API"],
+          links: [],
+          note: "Código privado.",
         },
-        { label: "Rotina", items: ["Git", "Notion", "Planilhas"] },
+        {
+          name: "Alerta de receita",
+          status: "Código público",
+          problem:
+            "Site com custo e pouca receita só é percebido quando alguém abre o painel, em geral tarde.",
+          built:
+            "Automação que cruza dados de ClickHouse e Plausible Analytics e avisa no Discord os sites com queda de receita, rodando por GitHub Actions.",
+          stack: ["Python", "GitHub Actions", "ClickHouse", "Plausible", "Discord"],
+          links: [{ label: "Repositório", href: "https://github.com/pedro-aguiarsv/alertas" }],
+        },
+        {
+          name: "Store On",
+          status: "Em produção, com cliente pagante",
+          problem:
+            "Pequenos vendedores precisam de uma loja própria com pagamento e frete funcionando, sem montar tudo do zero.",
+          built:
+            "SaaS de e-commerce white-label multi-tenant: pagamento com Mercado Pago Checkout Bricks, split de pagamento e frete pelo Melhor Envio, com OAuth por vendedor.",
+          stack: ["Multi-tenant", "Mercado Pago", "Melhor Envio", "OAuth"],
+          links: [],
+          note: "Código privado.",
+        },
+        {
+          name: "(In)finitudes",
+          status: "No ar",
+          problem:
+            "Livro, podcast e comunidade de um projeto cultural sobre finitude e cuidados paliativos estavam espalhados em links soltos.",
+          built:
+            "Portal editorial do projeto de Eleonora Santos, onde entrei no desenvolvimento técnico. O livro, o podcast Divã Infinito e o acervo ficam no mesmo lugar.",
+          stack: ["Astro", "TypeScript"],
+          links: [
+            { label: "Ver no ar", href: "https://infinitudes.com.br" },
+            { label: "Repositório", href: "https://github.com/pedro-aguiarsv/infinitudes-portal" },
+          ],
+        },
+        {
+          name: "SaaS de laudos",
+          status: "MVP",
+          mvp: true,
+          problem:
+            "Laudo em PDF comum não prova que é autêntico nem que não foi alterado depois de emitido.",
+          built:
+            "MVP com dados isolados por empresa (RLS), geração de PDF imutável e verificação pública por QR Code com hash.",
+          stack: ["Next.js", "Supabase", "Postgres RLS"],
+          links: [],
+          note: "Código privado.",
+        },
       ],
     },
     experience: {
-      kicker: "objeção",
-      title: "A pergunta justa: isso existe fora da aula?",
-      lead: "Existe. Na Costa Ventures eu fui de estágio a coordenação de retenção. A PUC Minas vem junto. Não é ela que segura o site.",
-      groups: [
+      kicker: "Experiência",
+      title: "Onde já trabalhei",
+      lead: "Dois anos em operação e retenção, e agora produtos próprios.",
+      jobs: [
         {
-          org: "Costa Ventures",
-          note: "Publisher",
-          roles: [
-            {
-              title: "Coordenador de Retenção",
-              period: "jan 2026 — atual",
-              current: true,
-              summary:
-                "E-mail, CRM e teste A/B para cortar churn e subir LTV. Onboarding, reativação e win-back saem sozinhos. A base é segmentada. A operação cresce sem crescer a equipe.",
-            },
-            {
-              title: "Coordenador de Operações",
-              period: "nov 2025 — jan 2026",
-              summary:
-                "A fila entra por ROAS. No meio do caminho, automações em Node.js e APIs, entre o negócio e o TI.",
-            },
-            {
-              title: "Analista de Operações",
-              period: "set 2024 — nov 2025",
-              summary:
-                "Redesenhei fluxo interno e montei dashboard de performance. Onde o processo vazava dinheiro, eu fechava.",
-            },
-            {
-              title: "Estagiário de Gestão de Operações",
-              period: "mai 2024 — set 2024",
-              summary:
-                "KPI todo dia, processo financeiro, e tarefa manual saindo do caminho.",
-            },
+          org: "Vekt e Toketow (MEI)",
+          role: "Fundador e desenvolvedor",
+          period: "jul 2026 — atual",
+          bullets: [
+            "Sites e landing pages para pequenos negócios (Framer, React/Vite, Astro), do briefing ao deploy na Vercel.",
+            "Pipeline de prospecção em Python e SQLite, com mensagens personalizadas por IA.",
+            "SaaS de e-commerce (Store On) com Mercado Pago e Melhor Envio, com a primeira cliente pagante em produção.",
+            "Venda consultiva de placas NFC e serviços digitais para o comércio local de BH.",
+          ],
+        },
+        {
+          org: "Costa Ventures (publisher)",
+          role: "Coordenador de Retenção",
+          period: "mai 2024 — jul 2026 · 2 anos e 2 meses",
+          path: "Estagiário → Analista → Coordenador de Operações → Coordenador de Retenção",
+          bullets: [
+            "Automações que eliminaram cerca de 7 horas de trabalho manual por dia, somando diferentes fluxos.",
+            "Retenção por e-mail e CRM (ActiveCampaign), com fluxos de onboarding, reativação e win-back e testes A/B de abertura, clique e conversão.",
+            "Acompanhamento diário de KPIs (churn, reativação, LTV, ROAS) e dashboards de performance para priorizar o que importa.",
+            "Supervisão de automações em Node.js e APIs, na ponte entre Negócios e TI.",
+            "Gestão de backlog, priorizando as demandas de maior impacto no ROAS.",
           ],
         },
         {
           org: "IBMEX Consultoria Júnior",
-          roles: [
-            {
-              title: "Consultor Comercial",
-              period: "jul 2023 — abr 2024",
-              summary:
-                "Prospecção ativa e pipeline no Moskit. Proposta feita para aquele cliente, não para todos. A conversão subiu.",
-            },
+          role: "Consultor Comercial",
+          period: "jul 2023 — abr 2024",
+          bullets: [
+            "Prospecção ativa e gestão de pipeline no CRM (Moskit), com propostas sob medida e aumento da conversão.",
           ],
         },
         {
           org: "Best Brownie",
-          roles: [
-            {
-              title: "Proprietário",
-              period: "ago 2017 — dez 2021",
-              summary:
-                "Quatro anos de microempresa. Caixa, estoque e o mercado. Eu era o dono e o turno.",
-            },
+          role: "Proprietário e administrador",
+          period: "ago 2017 — dez 2021",
+          bullets: [
+            "Gestão de ponta a ponta de um microempreendimento por 4 anos: fluxo de caixa, estoque e análise de mercado.",
           ],
         },
       ],
     },
+    skills: {
+      kicker: "Competências",
+      title: "O que eu uso de verdade",
+      lead: "Só o que aparece nos projetos e no trabalho acima.",
+      groups: [
+        {
+          label: "Código",
+          items: ["Python", "TypeScript", "React", "Next.js", "Node.js", "SQL"],
+        },
+        {
+          label: "Dados e IA",
+          items: ["Postgres", "ClickHouse", "APIs de LLM (Gemini, OpenAI)", "GA4"],
+        },
+        { label: "Automação e entrega", items: ["GitHub Actions", "Make", "Zapier", "Git"] },
+        { label: "Negócio", items: ["CRM", "Testes A/B", "KPIs"] },
+      ],
+    },
+    about: {
+      kicker: "Sobre",
+      title: "Da ponte entre negócio e TI para o código",
+      paragraphs: [
+        "Fui de estagiário a coordenador em 2 anos na Costa Ventures, na ponte entre negócio e TI. Hoje estudo Engenharia de Software e construo produtos próprios: um SaaS de e-commerce, um bot de saúde com IA e um pipeline de prospecção.",
+        "Procuro estágio ou vaga júnior onde eu possa juntar dados, automação e produto.",
+      ],
+      facts: [
+        { label: "Formação", value: "Engenharia de Software, PUC Minas (2026 — 2029, noturno)" },
+        { label: "Idiomas", value: "Português nativo, inglês avançado" },
+        { label: "Local", value: "Nova Lima, MG. Remoto ou híbrido em BH." },
+        { label: "Busco", value: "Estágio ou vaga júnior em TI: IA, dados, front-end e produto" },
+      ],
+      awards:
+        "Medalha de ouro no Canguru de Matemática Brasil. Premiado na Olimpíada Brasileira de Matemática (OBM).",
+      photoAlt: "Retrato de Pedro Aguiar",
+    },
     contact: {
-      kicker: "conversão",
-      title: "Fecha aqui.",
-      lead: "Vaga remota ou PJ. Manda o contexto. Eu respondo no e-mail.",
-      formTitle: "Deixa a mensagem",
-      support: "Sem anexo. Sem newsletter.",
+      kicker: "Contato",
+      title: "Vamos conversar",
+      lead: "Estágio ou vaga júnior em TI. Mande o contexto da vaga ou do projeto que eu respondo por e-mail.",
+      formTitle: "Deixe uma mensagem",
+      support: "Resposta por e-mail. Sem newsletter.",
       sending: "Enviando…",
+      send: "Enviar mensagem",
       fields: { name: "Nome", email: "E-mail", message: "Mensagem" },
       placeholders: {
         name: "Seu nome",
@@ -324,171 +291,211 @@ const copy = {
         message: "A vaga, o projeto, ou os dois. Uma frase já serve.",
       },
       errors: {
-        name: "Sem nome eu não sei quem responde.",
+        name: "Informe seu nome.",
         email: "E-mail incompleto.",
-        message: "Uma frase. O que é a vaga ou o projeto?",
-        send: "Não saiu. Confere o EmailJS e tenta de novo.",
+        message: "Escreva uma frase sobre a vaga ou o projeto.",
+        send: "Não consegui enviar. Escreva direto para o e-mail ao lado.",
       },
-      receipt: {
-        title: "Convertido",
-        event: "evento",
-        eventValue: "mensagem",
-        source: "origem",
-        sourceValue: "este site",
-        reply: "resposta",
-        replyValue: "por e-mail",
-        note: "Registrado neste protótipo. O e-mail de verdade entra na próxima etapa.",
-        body: "Você não leu um sobre mim. Desceu até o contato. É esse o trabalho.",
+      done: {
+        title: "Mensagem enviada",
+        body: "Obrigado. Respondo por e-mail.",
       },
-      toast: "Registrado neste protótipo.",
+      toast: "Mensagem enviada.",
     },
-    footer: { line: "Você chegou no fim. Isso é uma conversão." },
+    footer: { line: "Feito em Next.js. Atualizado em outubro de 2026." },
   },
   en: {
     meta: {
-      title: "Pedro Aguiar — the path to the click",
+      title: "Pedro Aguiar — Software Engineering, data and automation",
       description:
-        "Pedro Aguiar, Nova Lima. Retention, outreach, and portals. Open to remote roles or contract work.",
+        "Pedro Aguiar, Nova Lima, Brazil. Software Engineering student (PUC Minas) and founder of Vekt and Toketow. Looking for an internship or junior IT role, remote or hybrid in Belo Horizonte.",
     },
     skip: "Skip to content",
-    cta: "Let's talk",
-    secondary: "Show the proof",
+    navLabel: "Page sections",
     nav: {
-      about: "About",
       projects: "Projects",
       experience: "Experience",
+      skills: "Skills",
+      about: "About",
       contact: "Contact",
     },
-    railLabel: "Page stages",
-    menu: "Menu",
-    close: "Close",
-    stages: [
-      { id: "impressao", label: "Impression" },
-      { id: "qualificacao", label: "Qualification" },
-      { id: "prova", label: "Proof" },
-      { id: "objecao", label: "Objection" },
-      { id: "conversao", label: "Conversion" },
-    ],
     hero: {
-      kicker: "impression · nova lima",
-      lead: "You're already in the funnel.",
+      status: "Open to work",
+      lead: "I build systems that automate operations: from CRM to code.",
       support:
-        "Retention coordinator at Costa Ventures. Software engineering at PUC Minas, 2nd term. Remote role or contract.",
-    },
-    about: {
-      kicker: "qualification",
-      title: "Skip the biography. Straight to the point.",
-      paragraphs: [
-        "Pedro Aguiar, Nova Lima. Retention coordinator at Costa Ventures, a publisher. Second term of Software Engineering at PUC Minas.",
-        "The job today is keeping subscribers: email, CRM, A/B tests, churn, and LTV. The operation scales through flows, not through more people. I am moving from running that to building it.",
-        "I am not looking for endless freelance. I want a remote role or a contract, with a clear owner and a number on the table.",
-      ],
-      facts: [
-        {
-          label: "Education",
-          value: "Software Engineering, PUC Minas. 2nd term, 2026—2029.",
-        },
-        { label: "Work", value: "AI, development, CRM, and automation." },
-        {
-          label: "Interest",
-          value: "Front-end, back-end, automation, and AI.",
-        },
-        {
-          label: "Goal",
-          value:
-            "A remote seat, or a contract, where the code changes who stays and who arrives.",
-        },
-      ],
-      awards: "Gold at Kangaroo Math. Awarded at the Brazilian Math Olympiad.",
+        "Software Engineering student at PUC Minas. I spent 2 years at Costa Ventures, from intern to coordinator, and I now run Vekt and Toketow as founder. I focus on applied AI: automations that save hours and tools that ship.",
+      projects: "See projects",
+      cvPt: "Download CV (PT)",
+      cvEn: "Download CV (EN)",
+      linkedin: "LinkedIn",
     },
     projects: {
-      kicker: "proof",
-      title: "From the oldest to what is live now.",
-      lead: "Three builds. None of them is a class landing page.",
-      order: "oldest → latest",
-      repo: "Repository",
-      live: "Live",
-      items: projectsEn,
-    },
-    tools: {
-      kicker: "what actually enters the funnel",
-      title: "A pile of tools is not a skill.",
-      groups: [
-        { label: "Retention", items: ["Email", "CRM", "A/B tests", "GA4", "GTM"] },
-        { label: "Media", items: ["Google Ads"] },
+      kicker: "Projects",
+      title: "What I have built",
+      lead: "Six projects, the first four applying AI and automation in real use. Each with the problem, what I built and the stack.",
+      problem: "Problem",
+      built: "What I built",
+      stack: "Stack",
+      items: [
         {
-          label: "Code",
-          items: ["JavaScript", "TypeScript", "Node.js", "Astro", "HTML", "CSS", "SQL"],
+          name: "Bot Health",
+          status: "In daily use",
+          problem:
+            "Tracking workouts and health takes several apps, and none of them answers based on your own history.",
+          built:
+            "Mobile-first workout and health app (PWA) with a Telegram bot and an AI assistant that reads the user's history. It pulls Garmin data through a cron job.",
+          stack: ["Next.js 16", "TypeScript", "Drizzle", "Neon Postgres", "Gemini", "Telegram"],
+          links: [{ label: "View live", href: "https://bot-health.vercel.app" }],
+          note: "Private code.",
         },
-        { label: "Routine", items: ["Git", "Notion", "Spreadsheets"] },
+        {
+          name: "AI prospecting pipeline",
+          status: "Own use",
+          problem:
+            "Prospecting local businesses by hand is slow, and a generic message with nothing to show does not start a conversation.",
+          built:
+            "Pipeline that maps, enriches and scores leads and writes personalised messages with the Gemini API.",
+          stack: ["Python", "SQLite", "Gemini API"],
+          links: [],
+          note: "Private code.",
+        },
+        {
+          name: "Revenue alert",
+          status: "Public code",
+          problem:
+            "A site with cost and little revenue is only noticed when someone opens the dashboard, usually late.",
+          built:
+            "Automation that cross-checks ClickHouse and Plausible Analytics data and posts to Discord the sites whose revenue dropped, running on GitHub Actions.",
+          stack: ["Python", "GitHub Actions", "ClickHouse", "Plausible", "Discord"],
+          links: [{ label: "Repository", href: "https://github.com/pedro-aguiarsv/alertas" }],
+        },
+        {
+          name: "Store On",
+          status: "In production, with a paying customer",
+          problem:
+            "Small sellers need their own store with payments and shipping working, without building everything from scratch.",
+          built:
+            "White-label multi-tenant e-commerce SaaS: payments with Mercado Pago Checkout Bricks, payment split and shipping through Melhor Envio, with OAuth per seller.",
+          stack: ["Multi-tenant", "Mercado Pago", "Melhor Envio", "OAuth"],
+          links: [],
+          note: "Private code.",
+        },
+        {
+          name: "(In)finitudes",
+          status: "Live",
+          problem:
+            "The book, podcast and community of a cultural project on finitude and palliative care were scattered across loose links.",
+          built:
+            "Editorial portal for Eleonora Santos's project, where I joined the technical build. The book, the Divã Infinito podcast and the archive now live in one place.",
+          stack: ["Astro", "TypeScript"],
+          links: [
+            { label: "View live", href: "https://infinitudes.com.br" },
+            { label: "Repository", href: "https://github.com/pedro-aguiarsv/infinitudes-portal" },
+          ],
+        },
+        {
+          name: "Inspection report SaaS",
+          status: "MVP",
+          mvp: true,
+          problem:
+            "A plain PDF report cannot prove it is authentic or that it was not changed after being issued.",
+          built:
+            "MVP with per-company data isolation (RLS), immutable PDF generation and public verification through a QR code with a hash.",
+          stack: ["Next.js", "Supabase", "Postgres RLS"],
+          links: [],
+          note: "Private code.",
+        },
       ],
     },
     experience: {
-      kicker: "objection",
-      title: "The fair question: does this exist outside class?",
-      lead: "It does. At Costa Ventures I went from intern to retention coordinator. PUC Minas rides along. It does not carry the site.",
-      groups: [
+      kicker: "Experience",
+      title: "Where I have worked",
+      lead: "Two years in operations and retention, and now my own products.",
+      jobs: [
         {
-          org: "Costa Ventures",
-          note: "Publisher",
-          roles: [
-            {
-              title: "Retention Coordinator",
-              period: "Jan 2026 — now",
-              current: true,
-              summary:
-                "Email, CRM, and A/B tests to cut churn and raise LTV. Onboarding, reactivation, and win-back run on their own. The list is segmented. The operation grows without growing the team.",
-            },
-            {
-              title: "Operations Coordinator",
-              period: "Nov 2025 — Jan 2026",
-              summary:
-                "The queue is ordered by ROAS. In the middle of it, Node.js and API automations, between the business and IT.",
-            },
-            {
-              title: "Operations Analyst",
-              period: "Sep 2024 — Nov 2025",
-              summary:
-                "I redesigned internal flows and built a performance dashboard. Where the process was leaking money, I closed it.",
-            },
-            {
-              title: "Operations Management Intern",
-              period: "May 2024 — Sep 2024",
-              summary: "Daily KPIs, financial process, and manual work taken off the path.",
-            },
+          org: "Vekt and Toketow (sole proprietorship)",
+          role: "Founder and developer",
+          period: "Jul 2026 — present",
+          bullets: [
+            "Websites and landing pages for small businesses (Framer, React/Vite, Astro), from brief to deploy on Vercel.",
+            "Prospecting pipeline in Python and SQLite, with AI-personalised messages.",
+            "E-commerce SaaS (Store On) with Mercado Pago and Melhor Envio; first paying customer in production.",
+            "Consultative sales of NFC plates and digital services to local businesses in Belo Horizonte.",
+          ],
+        },
+        {
+          org: "Costa Ventures (publisher)",
+          role: "Retention Coordinator",
+          period: "May 2024 — Jul 2026 · 2 years 2 months",
+          path: "Intern → Analyst → Operations Coordinator → Retention Coordinator",
+          bullets: [
+            "Automations that removed about 7 hours of manual work per day, across different flows.",
+            "Retention through email and CRM (ActiveCampaign): onboarding, reactivation and win-back flows, with A/B tests on opens, clicks and conversion.",
+            "Daily tracking of KPIs (churn, reactivation, LTV, ROAS) and performance dashboards to set priorities.",
+            "Oversight of Node.js and API automations, bridging Business and IT.",
+            "Backlog management, prioritising the demands with the biggest ROAS impact.",
           ],
         },
         {
           org: "IBMEX Consultoria Júnior",
-          roles: [
-            {
-              title: "Commercial Consultant",
-              period: "Jul 2023 — Apr 2024",
-              summary:
-                "Active prospecting and a pipeline in Moskit. Proposals written for that client, not for everyone. Conversion went up.",
-            },
+          role: "Commercial Consultant",
+          period: "Jul 2023 — Apr 2024",
+          bullets: [
+            "Active prospecting and pipeline management in the CRM (Moskit), with tailored proposals and higher conversion.",
           ],
         },
         {
           org: "Best Brownie",
-          roles: [
-            {
-              title: "Owner",
-              period: "Aug 2017 — Dec 2021",
-              summary:
-                "Four years of a small company. Cash, inventory, and the market. I was the owner and the shift.",
-            },
+          role: "Owner and manager",
+          period: "Aug 2017 — Dec 2021",
+          bullets: [
+            "End-to-end management of a micro-business for 4 years: cash flow, inventory and market analysis.",
           ],
         },
       ],
     },
+    skills: {
+      kicker: "Skills",
+      title: "What I actually use",
+      lead: "Only what shows up in the projects and work above.",
+      groups: [
+        {
+          label: "Code",
+          items: ["Python", "TypeScript", "React", "Next.js", "Node.js", "SQL"],
+        },
+        {
+          label: "Data and AI",
+          items: ["Postgres", "ClickHouse", "LLM APIs (Gemini, OpenAI)", "GA4"],
+        },
+        { label: "Automation and delivery", items: ["GitHub Actions", "Make", "Zapier", "Git"] },
+        { label: "Business", items: ["CRM", "A/B testing", "KPIs"] },
+      ],
+    },
+    about: {
+      kicker: "About",
+      title: "From the bridge between business and IT to code",
+      paragraphs: [
+        "I went from intern to coordinator in 2 years at Costa Ventures, bridging business and IT. Today I study Software Engineering and build my own products: an e-commerce SaaS, a health bot with AI and a prospecting pipeline.",
+        "I am looking for an internship or junior role where I can combine data, automation and product.",
+      ],
+      facts: [
+        { label: "Education", value: "Software Engineering, PUC Minas (2026 — 2029, evening)" },
+        { label: "Languages", value: "Portuguese native, English advanced" },
+        { label: "Location", value: "Nova Lima, MG. Remote or hybrid in Belo Horizonte." },
+        { label: "Looking for", value: "Internship or junior IT role: AI, data, front-end and product" },
+      ],
+      awards:
+        "Gold medal at the Brazilian Kangaroo Math contest. Awarded at the Brazilian Math Olympiad (OBM).",
+      photoAlt: "Portrait of Pedro Aguiar",
+    },
     contact: {
-      kicker: "conversion",
-      title: "It closes here.",
-      lead: "Remote role or contract. Send the context. I reply by email.",
-      formTitle: "Leave the message",
-      support: "No attachment. No newsletter.",
+      kicker: "Contact",
+      title: "Let's talk",
+      lead: "Internship or junior IT role. Send the context of the role or project and I will reply by email.",
+      formTitle: "Leave a message",
+      support: "Reply by email. No newsletter.",
       sending: "Sending…",
+      send: "Send message",
       fields: { name: "Name", email: "Email", message: "Message" },
       placeholders: {
         name: "Your name",
@@ -496,25 +503,18 @@ const copy = {
         message: "The role, the project, or both. One sentence is enough.",
       },
       errors: {
-        name: "No name, and I don't know who I'm answering.",
+        name: "Please enter your name.",
         email: "That email is incomplete.",
-        message: "One sentence. What is the role or the project?",
-        send: "It did not go out. Check EmailJS and try again.",
+        message: "Write a sentence about the role or project.",
+        send: "I could not send it. Please write to the email beside this form.",
       },
-      receipt: {
-        title: "Converted",
-        event: "event",
-        eventValue: "message",
-        source: "source",
-        sourceValue: "this site",
-        reply: "reply",
-        replyValue: "by email",
-        note: "Saved in this prototype. Real email comes in the next step.",
-        body: "You did not read an about page. You reached the contact. That is the work.",
+      done: {
+        title: "Message sent",
+        body: "Thank you. I will reply by email.",
       },
-      toast: "Saved in this prototype.",
+      toast: "Message sent.",
     },
-    footer: { line: "You reached the end. That is a conversion." },
+    footer: { line: "Built with Next.js. Updated October 2026." },
   },
 } satisfies Record<Locale, Copy>
 

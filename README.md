@@ -6,11 +6,11 @@ O nome fica no núcleo. Sobre, Projetos, Experiência e Contato são círculos l
 
 Repositório: [github.com/pedro-aguiarsv/portfolio](https://github.com/pedro-aguiarsv/portfolio)
 
-O endereço publicado entra aqui depois do deploy na Vercel.
+Site publicado: [pedroaguiar-psi.vercel.app/pt](https://pedroaguiar-psi.vercel.app/pt). Inglês: [/en](https://pedroaguiar-psi.vercel.app/en).
 
 ## Status
 
-Site local funcional. O formulário envia e-mail pelo EmailJS quando as chaves estão no ambiente. A publicação na nuvem ainda não foi feita.
+Publicado na Vercel.
 
 ## Funcionalidades
 

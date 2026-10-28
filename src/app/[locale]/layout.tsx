@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import { notFound } from "next/navigation"
-import { HudNav } from "@/components/hud-nav"
+import { SiteNav } from "@/components/site-nav"
 import { DeferredToaster } from "@/components/deferred-toaster"
 import { getCopy, isLocale, siteUrl, type Locale } from "@/data/site"
 import "../globals.css"
@@ -71,26 +71,12 @@ export default async function RootLayout({
           crossOrigin="anonymous"
           fetchPriority="high"
         />
-        <link
-          rel="preload"
-          href="/fonts/newsreader-latin.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/newsreader-italic-latin.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
       </head>
       <body className="min-h-full">
         <a href="#conteudo" className="skip-link">
           {copy.skip}
         </a>
-        <HudNav locale={raw} />
+        <SiteNav locale={raw} />
         {children}
         <DeferredToaster />
       </body>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, type ComponentType, type ReactNode } from "react"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -19,13 +19,11 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
 const fieldClass =
-  "h-12 rounded-none border-foreground/25 bg-transparent text-base text-foreground placeholder:text-foreground/40 focus-visible:border-highlighter focus-visible:ring-highlighter/25 md:text-base"
+  "h-12 rounded-none border-foreground/25 bg-transparent text-base text-foreground placeholder:text-foreground/55 focus-visible:border-highlighter focus-visible:ring-highlighter/25 md:text-base"
 
 export function Contact({ locale }: { locale: Locale }) {
-  const page = getCopy(locale)
-  const copy = page.contact
+  const copy = getCopy(locale).contact
   const [sent, setSent] = useState(false)
-  const [Stamp, setStamp] = useState<ComponentType<{ children: ReactNode }> | null>(null)
 
   const schema = z.object({
     name: z.string().trim().min(2, copy.errors.name),
@@ -42,11 +40,7 @@ export function Contact({ locale }: { locale: Locale }) {
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-    const [{ Stamp: StampMark }, emailjs] = await Promise.all([
-      import("@/components/stamp"),
-      import("@emailjs/browser"),
-      ensureToaster(),
-    ])
+    const [emailjs] = await Promise.all([import("@emailjs/browser"), ensureToaster()])
     const { toast } = await import("sonner")
 
     if (!serviceId || !templateId || !publicKey) {
@@ -71,7 +65,6 @@ export function Contact({ locale }: { locale: Locale }) {
       return
     }
 
-    setStamp(() => StampMark)
     setSent(true)
     toast.success(copy.toast)
   }
@@ -84,16 +77,24 @@ export function Contact({ locale }: { locale: Locale }) {
   ]
 
   return (
-    <section id="conversao">
+    <section
+      id="contact"
+      aria-labelledby="contact-title"
+      className="scroll-mt-14 border-t border-border py-16 md:py-24"
+    >
+      <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
       <div className="grid items-start gap-12 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <p className="font-mono text-[11px] tracking-[0.2em] text-highlighter uppercase">
+          <p className="font-mono text-xs tracking-[0.2em] text-highlighter uppercase">
             {copy.kicker}
           </p>
-          <h2 className="mt-6 font-serif text-5xl leading-[0.9] font-normal tracking-[-0.04em] md:text-7xl">
+          <h2
+            id="contact-title"
+            className="mt-4 text-3xl leading-[1.05] font-semibold tracking-[-0.03em] md:text-5xl"
+          >
             {copy.title}
           </h2>
-          <p className="mt-5 max-w-sm text-muted-foreground">{copy.lead}</p>
+          <p className="mt-4 max-w-sm text-base text-muted-foreground md:text-lg">{copy.lead}</p>
           <ul className="mt-10 divide-y divide-border border-y border-border">
             {links.map((link) => (
               <li key={link.label}>
@@ -102,9 +103,9 @@ export function Contact({ locale }: { locale: Locale }) {
                   {...(link.href.startsWith("http")
                     ? { target: "_blank", rel: "noreferrer noopener" }
                     : {})}
-                  className="flex items-baseline justify-between gap-4 py-3 hover:text-highlighter"
+                  className="flex min-h-12 items-center justify-between gap-4 py-2 hover:text-highlighter"
                 >
-                  <span className="font-mono text-[11px] tracking-[0.16em] uppercase">
+                  <span className="font-mono text-xs tracking-[0.16em] uppercase">
                     {link.label}
                   </span>
                   <span className="truncate text-sm text-muted-foreground">{link.value}</span>
@@ -114,37 +115,16 @@ export function Contact({ locale }: { locale: Locale }) {
           </ul>
         </div>
 
-        <div className="hud-frame px-6 py-8 text-foreground md:px-10 md:py-12 lg:col-span-6 lg:col-start-7">
+        <div className="border border-border bg-card px-6 py-8 text-foreground md:px-10 md:py-10 lg:col-span-6 lg:col-start-7">
           {sent ? (
             <div aria-live="polite">
-              {Stamp ? (
-                <Stamp>{copy.receipt.title}</Stamp>
-              ) : (
-                <p className="stamp-in inline-block border-[3px] border-stamp px-3 py-1 font-mono text-sm tracking-[0.18em] text-stamp uppercase">
-                  {copy.receipt.title}
-                </p>
-              )}
-              <dl className="mt-8 space-y-2 font-mono text-xs tracking-[0.08em] uppercase">
-                <div className="flex justify-between gap-4">
-                  <dt>{copy.receipt.event}</dt>
-                  <dd>{copy.receipt.eventValue}</dd>
-                </div>
-                <div className="flex justify-between gap-4">
-                  <dt>{copy.receipt.source}</dt>
-                  <dd>{copy.receipt.sourceValue}</dd>
-                </div>
-                <div className="flex justify-between gap-4">
-                  <dt>{copy.receipt.reply}</dt>
-                  <dd>{copy.receipt.replyValue}</dd>
-                </div>
-              </dl>
-              <p className="mt-8 font-serif text-2xl leading-snug italic">{copy.receipt.body}</p>
-              <p className="mt-4 text-sm text-foreground/70">{copy.receipt.note}</p>
+              <h3 className="text-2xl font-semibold tracking-[-0.02em]">{copy.done.title}</h3>
+              <p className="mt-3 text-muted-foreground">{copy.done.body}</p>
             </div>
           ) : (
             <>
-              <h3 className="font-serif text-3xl">{copy.formTitle}</h3>
-              <p className="mt-2 text-sm text-foreground/70">{copy.support}</p>
+              <h3 className="text-2xl font-semibold tracking-[-0.02em]">{copy.formTitle}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{copy.support}</p>
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
@@ -156,7 +136,7 @@ export function Contact({ locale }: { locale: Locale }) {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                        <FormLabel className="font-mono text-xs tracking-[0.14em] text-muted-foreground uppercase">
                           {copy.fields.name}
                         </FormLabel>
                         <FormControl>
@@ -176,7 +156,7 @@ export function Contact({ locale }: { locale: Locale }) {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                        <FormLabel className="font-mono text-xs tracking-[0.14em] text-muted-foreground uppercase">
                           {copy.fields.email}
                         </FormLabel>
                         <FormControl>
@@ -197,7 +177,7 @@ export function Contact({ locale }: { locale: Locale }) {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                        <FormLabel className="font-mono text-xs tracking-[0.14em] text-muted-foreground uppercase">
                           {copy.fields.message}
                         </FormLabel>
                         <FormControl>
@@ -215,15 +195,16 @@ export function Contact({ locale }: { locale: Locale }) {
                   <Button
                     type="submit"
                     disabled={form.formState.isSubmitting}
-                    className="h-12 rounded-none px-5 font-mono text-xs tracking-[0.14em] uppercase shadow-[0_0_24px_rgb(126_231_255/0.22)] hover:bg-[#bff4ff]"
+                    className="h-12 rounded-none px-5 text-sm font-medium hover:bg-[#8aeeff]"
                   >
-                    {form.formState.isSubmitting ? copy.sending : page.cta}
+                    {form.formState.isSubmitting ? copy.sending : copy.send}
                   </Button>
                 </form>
               </Form>
             </>
           )}
         </div>
+      </div>
       </div>
     </section>
   )

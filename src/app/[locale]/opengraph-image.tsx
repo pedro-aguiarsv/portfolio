@@ -12,8 +12,14 @@ export default async function OpenGraphImage({
 }) {
   const { locale: raw } = await params
   const locale = isLocale(raw) ? raw : "pt"
-  const line = locale === "en" ? "You're already in the funnel." : "Você já entrou no funil."
-  const cta = locale === "en" ? "Let's talk" : "Quero conversar"
+  const line =
+    locale === "en"
+      ? "I build systems that automate operations: from CRM to code."
+      : "Construo sistemas que automatizam operação: do CRM ao código."
+  const cta =
+    locale === "en"
+      ? "Open to internships and junior IT roles"
+      : "Disponível para estágio ou vaga júnior em TI"
 
   return new ImageResponse(
     (
@@ -29,8 +35,8 @@ export default async function OpenGraphImage({
           padding: 72,
         }}
       >
-        <div style={{ fontSize: 22, letterSpacing: 6 }}>PEDRO AGUIAR · NOVA LIMA</div>
-        <div style={{ fontSize: 76, fontStyle: "italic", lineHeight: 1.05, maxWidth: 900 }}>
+        <div style={{ fontSize: 22, letterSpacing: 6 }}>PEDRO AGUIAR · SOFTWARE ENGINEERING</div>
+        <div style={{ fontSize: 68, fontWeight: 700, lineHeight: 1.05, maxWidth: 900 }}>
           {line}
         </div>
         <div
