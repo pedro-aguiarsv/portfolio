@@ -2,7 +2,7 @@
 
 Portfólio profissional para a disciplina DIAW, Engenharia de Software, PUC Minas. O site apresenta trajetória, projetos, experiências e contato em português e inglês.
 
-O nome fica no núcleo. Sobre, Projetos, Experiência e Contato são círculos ligados a ele. O clique abre a janela daquele tema.
+Página única de rolagem, sem nada escondido atrás de clique: abertura com o nome e a disponibilidade, projetos, experiência, competências, sobre e contato. O campo animado (HUD) aparece só no hero.
 
 Repositório: [github.com/pedro-aguiarsv/portfolio](https://github.com/pedro-aguiarsv/portfolio)
 
@@ -14,9 +14,10 @@ Publicado na Vercel.
 
 ## Funcionalidades
 
-- Sobre, com formação, atuação, interesses, objetivo e foto, em português e inglês
-- Projetos do mais antigo ao mais recente, com descrição, tecnologias e links quando existem
-- Experiências com empresa, cargo, período e descrição
+- Hero com status de disponibilidade e atalhos: ver projetos, baixar o currículo (PT e EN) e LinkedIn
+- Projetos de IA aplicada e produtos próprios, cada um com o problema, o que foi construído, a stack e os links
+- Experiência com empresa, cargo, período e descrição
+- Competências e sobre, em português e inglês
 - Contato com e-mail, WhatsApp, LinkedIn e GitHub
 - Formulário de nome, e-mail e mensagem, com validação e envio por EmailJS
 - Layout responsivo
@@ -28,7 +29,6 @@ Publicado na Vercel.
 - Tailwind CSS 4
 - shadcn/ui e Radix
 - React Hook Form e Zod
-- Framer Motion, carregado só depois do envio do formulário
 - EmailJS (`@emailjs/browser`)
 - Sonner
 
@@ -64,13 +64,14 @@ npm start
 
 ```text
 public/pedro-aguiar.jpg          foto
-src/app/[locale]                 páginas, metadata e Open Graph
-src/components/orbit-hub.tsx     núcleo, círculos e janelas
-src/components/hud-nav.tsx       topo
-src/components/site-footer.tsx   rodapé e links das seções
-src/components                   seções de cada janela
+public/Pedro_Aguiar_CV_PT.pdf    currículo em português (e _EN.pdf em inglês)
+src/app/[locale]                 página, metadata e imagem Open Graph (pt e en)
+src/components/hero.tsx          abertura; hero-field.tsx é o campo animado
+src/components/site-nav.tsx      navegação do topo
+src/components/projects.tsx      projetos (about, experience, skills e contact são as demais seções)
+src/components/site-footer.tsx   rodapé
 src/components/ui                primitives do shadcn/ui
-src/data/site.ts                 textos, projetos e experiências
+src/data/site.ts                 textos, projetos e experiências (PT e EN)
 .env.example                     modelo das variáveis
 ```
 
